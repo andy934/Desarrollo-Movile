@@ -11,9 +11,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Practica03Theme {
-                MainScreen()
-            }
+            MainScreen()
         }
     }
 }

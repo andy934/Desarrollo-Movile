@@ -1,6 +1,5 @@
 package com.example.practica03
 
-import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun MainScreen(startActicity: Context.(Intent) -> Unit, stratActivity: Context.(Intent) -> Unit) {
+fun MainScreen() {
     val context = LocalContext.current
 
     var nombre by remember { mutableStateOf("") }
@@ -67,13 +66,14 @@ fun MainScreen(startActicity: Context.(Intent) -> Unit, stratActivity: Context.(
 
         Spacer(modifier = Modifier.height(24.dp))
 
+        // Intent explícito: abre ProfileActivity
         Button(
             onClick = {
                 val intent = Intent(context, ProfileActivity::class.java).apply {
                     putExtra("EXTRA_NOMBRE", nombre)
                     putExtra("EXTRA_CORREO", correo)
                 }
-                context.startActicity(intent)
+                context.startActivity(intent)
             },
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -82,6 +82,7 @@ fun MainScreen(startActicity: Context.(Intent) -> Unit, stratActivity: Context.(
 
         Spacer(modifier = Modifier.height(12.dp))
 
+        // Intent implícito: comparte texto con cualquier app compatible
         OutlinedButton(
             onClick = {
                 val sendIntent = Intent(Intent.ACTION_SEND).apply {
@@ -89,11 +90,11 @@ fun MainScreen(startActicity: Context.(Intent) -> Unit, stratActivity: Context.(
                     type = "text/plain"
                 }
                 val chooser = Intent.createChooser(sendIntent, "Compartir datos usando:")
-                context.stratActivity(chooser)
+                context.startActivity(chooser)
             },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Compartir Datos (Intent Explicito)")
+            Text("Compartir Datos (Intent Implicito)")
         }
     }
 }
