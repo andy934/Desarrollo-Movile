@@ -1,9 +1,10 @@
-package componentes
+package com.example.practica04.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -18,18 +19,18 @@ import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomDatePicker(getTimerZone: Unit.(String) -> TimeZone) {
+fun CustomDatePicker() {
     var openDialog by remember { mutableStateOf(false) }
-    var datePickerState = rememberDatePickerState()
-    var selsectedDateText by remember { mutableStateOf("Seleccionar Fecha") }
+    val datePickerState = rememberDatePickerState()
+    var selectedDateText by remember { mutableStateOf("Seleccionar Fecha") }
 
     Button(
-        onClick = { openDialog = true},
+        onClick = { openDialog = true },
         modifier = Modifier.fillMaxWidth()
     ) {
-        val SelectedDateText = null
-        Text(SelectedDateText)
+        Text(selectedDateText)
     }
 
     if (openDialog) {
@@ -39,8 +40,8 @@ fun CustomDatePicker(getTimerZone: Unit.(String) -> TimeZone) {
                 TextButton(onClick = {
                     datePickerState.selectedDateMillis?.let { millis ->
                         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                        formatter.timeZone = TimeZone.getTimerZone("UTC")
-                        selsectedDateText = formatter.format(Date(millis))
+                        formatter.timeZone = TimeZone.getTimeZone("UTC")
+                        selectedDateText = formatter.format(Date(millis))
                     }
                     openDialog = false
                 }) {

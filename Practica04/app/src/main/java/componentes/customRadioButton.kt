@@ -1,5 +1,6 @@
-package componentes
+package com.example.practica04.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
@@ -15,28 +16,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CustomRadioButton(clickeable: Modifier.Companion.(() -> Unit?) -> Modifier) {
-    var selectedOption by remember { mutableStateOf("Oopcion 1") }
+fun CustomRadioButton() {
+    var selectedOption by remember { mutableStateOf("Opción 1") }
 
     Row(verticalAlignment = Alignment.CenterVertically) {
         RadioButton(
-            selected = (selectedOption == "Oopcion 1"),
-            onClick = { selectedOption = "Opcion 1" }
+            selected = (selectedOption == "Opción 1"),
+            onClick = { selectedOption = "Opción 1" }
         )
         Text(
-            text = "Opcion 1",
-            modifier = Modifier.clickeable { selectedOption = "Opcion 1" }
+            text = "Opción 1",
+            modifier = Modifier.clickable { selectedOption = "Opción 1" }
         )
 
         Spacer(modifier = Modifier.width(16.dp))
 
         RadioButton(
-            selected = (selectedOption == "Opcion 2"),
-            onClick = { selectedOption = "Opcion 2" }
+            selected = (selectedOption == "Opción 2"),
+            onClick = { selectedOption = "Opción 2" }
         )
         Text(
-            text = "Opcion 2",
-            modifier = Modifier.clickeable { selectedOption = "Opcion 2"}
+            text = "Opción 2",
+            modifier = Modifier.clickable { selectedOption = "Opción 2" }
         )
     }
 }
